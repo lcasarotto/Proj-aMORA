@@ -1,0 +1,22 @@
+{
+  "testEnvironment": "node",
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "lcov", "html"],
+  "testMatch": ["**/tests/**/*.test.js"],
+  "verbose": false,
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 75,
+      "functions": 85,
+      "lines": 85,
+      "statements": 85
+    }
+  },
+  "collectCoverageFrom": [
+    "src/**/*.js",
+    "!src/app.js",
+    "!**/node_modules/**"
+  ]
+}

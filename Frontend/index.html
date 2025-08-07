@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aMORA - Compre seu imóvel com entrada a partir de 5%</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <img src="assets/logo_amora_blue.png" alt="aMORA - Financiamento Imobiliário" class="logo-image">
+            </div>
+            <h1 class="subtitle">Financiamento Imobiliário Descomplicado</h1>
+            <p class="hero-description">
+                Transformamos sonhos em realidade imobiliária. Compre seu imóvel com uma entrada a partir de 5% 
+                e junte os 20% do financiamento em até 5 anos. Uma solução moderna, segura e acessível 
+                para quem quer morar melhor hoje.
+            </p>
+        </header>
+
+        <main class="main">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🏠</span>
+                    <h3 class="feature-title">Escolha onde quer morar</h3>
+                    <p class="feature-description">
+                        Encontre seu lugar ideal para viver. Você pode escolher entre apartamento, 
+                        casa de vila ou casa de condomínio. A liberdade de escolher está em suas mãos.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💰</span>
+                    <h3 class="feature-title">Entrada a partir de 5%</h3>
+                    <p class="feature-description">
+                        Dê o primeiro passo com uma entrada reduzida. Começe com apenas 5% do valor 
+                        do imóvel e nós ajudamos você a transformar esse sonho em realidade.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h3 class="feature-title">Flexibilidade total</h3>
+                    <p class="feature-description">
+                        Reuniu os 20% para a entrada do financiamento? O imóvel é seu. Mudou de ideia? 
+                        Você pode receber de volta até 100% do que investiu.
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <h2>Simule seu Financiamento</h2>
+                <form id="simulationForm" class="simulation-form">
+                    <div class="form-group">
+                        <label for="valorImovel">Valor do Imóvel</label>
+                        <div class="input-wrapper">
+                            <span class="currency">R$</span>
+                            <input 
+                                type="text" 
+                                id="valorImovel" 
+                                name="valorImovel" 
+                                placeholder="500.000,00"
+                                required
+                            >
+                        </div>
+                        <small class="help-text">Digite o valor total do imóvel desejado</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="percentualEntrada">Percentual de Entrada (%)</label>
+                        <input 
+                            type="range" 
+                            id="percentualEntrada" 
+                            name="percentualEntrada" 
+                            min="5" 
+                            max="20" 
+                            value="10"
+                            class="range-input"
+                        >
+                        <div class="range-values">
+                            <span>5%</span>
+                            <span id="percentualValue" class="current-value">10%</span>
+                            <span>20%</span>
+                        </div>
+                        <small class="help-text">Escolha o percentual de entrada inicial (de 5% a 20%)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="anosContrato">Prazo do Contrato</label>
+                        <select id="anosContrato" name="anosContrato" required>
+                            <option value="">Selecione o prazo...</option>
+                            <option value="1">1 ano</option>
+                            <option value="2">2 anos</option>
+                            <option value="3">3 anos</option>
+                            <option value="4">4 anos</option>
+                            <option value="5">5 anos</option>
+                        </select>
+                        <small class="help-text">Tempo para guardar o valor necessário para o financiamento</small>
+                    </div>
+
+                    <button type="submit" class="btn-simulate" id="btnSimulate">
+                        <span class="btn-text">Simular Financiamento</span>
+                        <div class="btn-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            Calculando...
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <h2>Resultado da Simulação</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Valor do Imóvel</h3>
+                        <p class="result-value" id="resultValorImovel">-</p>
+                    </div>
+                    <div class="result-card highlight">
+                        <h3>Entrada Inicial</h3>
+                        <p class="result-value" id="resultValorEntrada">-</p>
+                        <small id="resultPercentualEntrada">-</small>
+                    </div>
+                    <div class="result-card">
+                        <h3>Valor a Financiar</h3>
+                        <p class="result-value" id="resultValorFinanciado">-</p>
+                    </div>
+                    <div class="result-card highlight">
+                        <h3>Total a Guardar</h3>
+                        <p class="result-value" id="resultTotalGuardar">-</p>
+                        <small>20% do valor para financiamento</small>
+                    </div>
+                    <div class="result-card primary">
+                        <h3>Parcela Mensal</h3>
+                        <p class="result-value large" id="resultParcelaMensal">-</p>
+                        <small id="resultMesesContrato">-</small>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="btn-secondary" id="btnNewSimulation">
+                        Nova Simulação
+                    </button>
+                    <button type="button" class="btn-primary" id="btnSaveResult">
+                        📄 Salvar em PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="error-container" id="errorContainer" style="display: none;">
+                <div class="error-message">
+                    <h3>Ops! Algo deu errado</h3>
+                    <p id="errorMessage">Erro desconhecido</p>
+                    <button type="button" class="btn-secondary" id="btnTryAgain">
+                        Tentar Novamente
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 aMORA - Transformando sonhos em realidade imobiliária</p>
+        </footer>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
